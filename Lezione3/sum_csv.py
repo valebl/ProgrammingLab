@@ -13,8 +13,10 @@ def sum_csv(file_name):
     
     if len(values) > 0:
         sum_values = sum(values)
+        file.close()
         return sum_values
     else:
+        file.close()
         return None
 
 # Comment the following lines to test the program with Autograding
