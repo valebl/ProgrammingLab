@@ -19,33 +19,33 @@ class CSVFile():
 
         file_lines = file.readlines()
 
-        # Controllo che il file non sia vuoto (o che non contenga solo l'intestazione)
-        if len(file_lines) <= 1:
+        # Controllo che il file non sia vuoto
+        if len(file_lines) == 0:
             return []
-
-        # Controllo che start sia convertibile in int
+            
+        # Controllo che start sia convertibile in int e sanitizzo
         if start is None:
-            start_clean = 2
-        else:
+            start_clean = 1
+        elif type(start) is int or type(start) is float:
             start_clean = int(start)
-            #try:
-            #    start_clean = int(start)
-            #except:
-            #    raise Exception("Errore: {}".format(e))
+        elif type(start) is str and start.isdigit():
+            start_clean = int(start)
+        else:
+            raise Exception("Couldn't convert start to int")
 
-        # Controllo che end sia convertibile in int
+        # Controllo che end sia convertibile in int e sanitizzo
         if end is None:
             end_clean = len(file_lines)
-        else:
+        elif type(end) is int or type(end) is float:
             end_clean = int(end)
-            # try:    
-            #     end_clean = int(end)
-            # except:
-            #     raise Exception ("Errore: Couldn't convert to integer: {}".format(e))
+        elif type(end) is str and end.isdigit():
+            end_clean = int(end)
+        else:
+            raise Exception("Couldn't convert end to int")
 
         # Ora start e end sono due interi, ma servono altri controlli
-        if start_clean <= 1:
-            raise Exception("start should be greater than 1.")
+        if start_clean <= 0:
+            raise Exception("start should be greater than 0.")
         elif start_clean > len(file_lines):
             raise Exception("start should be smaller than the file lenght.")
         elif end_clean > len(file_lines):
@@ -54,14 +54,12 @@ class CSVFile():
             raise Exception("end should be larger than start.") 
         else:
             start_clean -= 1
-        # except Exception as e:
-        #     print("Errore: {}".format(e))
-        #     return None
+            end_clean -= 1
             
         data = []
-        #print(start_clean, end_clean)
+
         for i, line in enumerate(file_lines):
-            if i >= start_clean and i < end_clean:
+            if i > 0 and i >= start_clean and i <= end_clean :
                     l = line.strip().split(',')
                     data.append(l)
         file.close()
@@ -85,21 +83,21 @@ class NumericalCSVFile(CSVFile):
 
 
 # Comment the following lines to test the program with Autograding
-file_name = 'shampoo_sales.csv'
-# file_name = 'test.csv'
-# # file_name = 'empty.csv'
+# file_name = 'shampoo_sales.csv'
+# # file_name = 'test.csv'
+# # # # # file_name = 'empty.csv'
 # # file_name = 'tmp_file.csv'
 
-csv_file = CSVFile(file_name)
-values = csv_file.get_data(1, 1)
-print(values)
+# csv_file = CSVFile(file_name)
+# values = csv_file.get_data(2,2)
+# print(values)
 # print(len(values))
 
 # numerical_csv_file = NumericalCSVFile(file_name)
 # values = numerical_csv_file.get_data(start=1)
 # print(values)
 
-# with open("test_2.csv", 'w') as file:
+# with open("test.csv", 'w') as file:
 
 #     file.write('Date,Sales\n') # 1
 #     file.write('1949-01,1\n')  # 2
