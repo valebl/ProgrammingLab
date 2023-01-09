@@ -83,15 +83,15 @@ class NumericalCSVFile(CSVFile):
 
 
 # Comment the following lines to test the program with Autograding
-# file_name = 'shampoo_sales.csv'
-# # file_name = 'test.csv'
-# # # # # file_name = 'empty.csv'
-# # file_name = 'tmp_file.csv'
+file_name = 'shampoo_sales.csv'
+# file_name = 'test.csv'
+# # # # file_name = 'empty.csv'
+# file_name = 'tmp_file.csv'
 
-# csv_file = CSVFile(file_name)
-# values = csv_file.get_data(2,2)
-# print(values)
-# print(len(values))
+csv_file = CSVFile(file_name)
+values = csv_file.get_data(3,3)
+print(values)
+print(len(values))
 
 # numerical_csv_file = NumericalCSVFile(file_name)
 # values = numerical_csv_file.get_data(start=1)
