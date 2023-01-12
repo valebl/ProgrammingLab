@@ -38,7 +38,6 @@ class IncrementModel(Model):
         for i in range(len(data)-self.finestra):
             prediction = self.predict(data[i:i+self.finestra])
             error = abs(data[i+self.finestra] - prediction)
-            #print(data[i:i+self.finestra], data[i+self.finestra], prediction, error)
             errors.append(error)
         return sum(errors) / len(errors)      
         
@@ -68,11 +67,11 @@ class FitIncrementModel(IncrementModel):
 # print(increment_model.predict(values[-3:]))
 # print(increment_model.evaluate(values[-4:]))
 
-shampoo_sales = [266.0, 145.9, 183.1, 119.3, 180.3, 168.5, 231.8, 224.5, 192.8, 122.9, 336.5, 185.9, 194.3, 149.5, 210.1, 273.3, 191.4, 287.0, 226.0, 303.6, 289.9, 421.6, 264.5, 342.3, 339.7, 440.4, 315.9, 439.3, 401.3, 437.4, 575.5, 407.6, 682.0, 475.3, 581.3, 646.9]
+# shampoo_sales = [266.0, 145.9, 183.1, 119.3, 180.3, 168.5, 231.8, 224.5, 192.8, 122.9, 336.5, 185.9, 194.3, 149.5, 210.1, 273.3, 191.4, 287.0, 226.0, 303.6, 289.9, 421.6, 264.5, 342.3, 339.7, 440.4, 315.9, 439.3, 401.3, 437.4, 575.5, 407.6, 682.0, 475.3, 581.3, 646.9]
 
-increment_model_shampoo = IncrementModel(3)
-fit_increment_model_shampoo = FitIncrementModel(3)
-fit_increment_model_shampoo.fit(shampoo_sales[:24])
+# increment_model_shampoo = IncrementModel(3)
+# fit_increment_model_shampoo = FitIncrementModel(3)
+# fit_increment_model_shampoo.fit(shampoo_sales[:24])
 
-print(increment_model_shampoo.evaluate(shampoo_sales[-12:]))
-print(fit_increment_model_shampoo.evaluate(shampoo_sales[-12:]))
+# print(increment_model_shampoo.evaluate(shampoo_sales[-12:]))
+# print(fit_increment_model_shampoo.evaluate(shampoo_sales[-12:]))
